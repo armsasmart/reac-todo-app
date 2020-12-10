@@ -1,0 +1,4 @@
+{
+  "local": "mongodb://127.0.0.1/todo-app",
+  "test": "mongodb://127.0.0.1/todo-app-test"
+}

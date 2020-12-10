@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const db = require('../models/index')
+const Todo = require('../models/todo')
 
 router.get('/', async (req, res) => {
   try {
-    const todos = await db.Todo.find({})
+    const todos = await Todo.find({})
     res.status(200).json({
       data: todos,
       message: null
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const todo = await db.Todo.create(req.body)
+    const todo = await Todo.create(req.body)
     res.status(200).json({
       data: todo,
       message: null
@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const todo = await db.Todo.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    const todo = await Todo.findByIdAndUpdate(req.params.id, req.body, { new: true })
     res.status(200).json({
       data: todo,
       message: null
@@ -52,7 +52,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    await db.Todo.findByIdAndRemove(req.params.id)
+    await Todo.findByIdAndRemove(req.params.id)
     res.status(200).json({
       data: null,
       message: 'deleted successful'

@@ -1,13 +1,22 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://127.0.0.1/todo-app', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
-})
-const db = mongoose.connection
-db.on('error',console.error.bind(console, 'connection error: 🔥'))
-db.once('open', () => {
-  console.log('connection success: ✨')
-})
-
-module.exports.Todo = require('./todo')
+const env = process.env.NODE_ENV || 'local'
+const configDB = require('../config/db.json')[env]
+module.exports = {
+  mongoose,
+  connect: () => {
+    mongoose.Promise = Promise;
+    mongoose.connect(configDB, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false
+    });
+    const db = mongoose.connection
+    db.on('error',console.error.bind(console, 'db connection error: 🔥'))
+    db.once('open', () => {
+    })
+  },
+  disconnect: done => {
+    mongoose.disconnect(done);
+  }
+};

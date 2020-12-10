@@ -2,7 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const app = express()
-const PORT = process.env.PORT || 3000
+const { connect } = require('./models/index')
+connect()
 
 const indexRouter = require('./routes/index')
 const todoRouter = require('./routes/todos')
@@ -21,6 +22,4 @@ app.use((req, res) => {
   })
 })
 
-app.listen(PORT, () => {
-  console.log(`listening on port ${PORT}`)
-})
+module.exports = app
