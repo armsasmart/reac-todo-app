@@ -104,7 +104,7 @@ function App() {
       </div>
       <div className="mt-4">
         {todos.map(({ _id, message, completed }) => (
-          <div className="mt-2 flex items-center justify-center">
+          <div className="mt-2 flex items-center justify-center" key={_id}>
                      <input
                       id={_id}
                       type="checkbox"

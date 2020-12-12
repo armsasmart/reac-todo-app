@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://127.0.0.1:3000/api/todos/'
+const API_URL = 'http://127.0.0.1:3002/api/todos/'
 
 async function getTodos() {
   const { data: { data: todos } } = await axios.get(API_URL);
